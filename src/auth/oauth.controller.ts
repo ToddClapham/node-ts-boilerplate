@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { OAuth2Client } from "./CognitiveOAuth2Client";
+import { OAuth2Client } from "./OAuth2Client";
 import { dataSource } from "../data-source";
-import { UserEntity } from "../user/UserEntity";
+import { UserEntity } from "../user/user.entity";
 import { tokenService } from "../services";
 import { getEnvVariable } from "../env";
 

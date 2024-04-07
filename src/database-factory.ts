@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm"
 import path = require("path");
-import { UserEntity } from "./user/UserEntity";
+import { UserEntity } from "./user/user.entity";
 import { getEnvVariable } from "./env";
 
 const isProduction = getEnvVariable('NODE_ENV') === 'production';

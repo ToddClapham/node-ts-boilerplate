@@ -3,7 +3,7 @@ const json = express.json();
 const router = express.Router();
 
 // controllers and middleware
-import authCont from './cognitive-oauth.controller';
+import authCont from './oauth.controller';
 
 router.get('/oauth/redirect_url', authCont.getRedirectUrl);
 router.post('/oauth/oauth2callback', json, authCont.oauth2Callback);

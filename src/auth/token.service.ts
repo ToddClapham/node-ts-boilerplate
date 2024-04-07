@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { UserEntity } from '../user/UserEntity';
+import { UserEntity } from '../user/user.entity';
 
 export class TokenService {
 

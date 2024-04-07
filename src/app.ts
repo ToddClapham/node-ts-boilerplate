@@ -2,11 +2,7 @@
 const corsAddress = 'http://localhost:4200';
 
 import path from 'path';
-import dotenv from 'dotenv';
-dotenv.config({path: path.join(__dirname,'../', '.env')});
-
 import cors from 'cors';
-
 import express, { Request, Response, NextFunction } from 'express';
 
 import publicRoutes from './public/public.routes';

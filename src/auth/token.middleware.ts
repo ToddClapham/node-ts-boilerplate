@@ -5,8 +5,9 @@ import ErrorMessage from "../util/ErrorMessage";
 import { HttpCode } from "../util/HttpCodes";
 import { AuthenticationTypes } from "./AuthenticationTypes";
 import { tokenService } from "../services";
+import { getEnvVariable } from "../env";
 
-const authMethodToUse = process.env.auth_method ?? 'jwt';
+const authMethodToUse = getEnvVariable('auth_method') ?? 'jwt';
 console.log('Initialised token middleware to use method:', authMethodToUse);
 
 async function authenticate(req: Request, res: Response, next: NextFunction) {

@@ -3,12 +3,13 @@ import { OAuth2Client } from "./CognitiveOAuth2Client";
 import { dataSource } from "../data-source";
 import { UserEntity } from "../user/UserEntity";
 import { tokenService } from "../services";
+import { getEnvVariable } from "../env";
 
 
-const oauth_url = process.env.oauth_url;
-const client_id = process.env.client_id;
-const client_secret = process.env.client_secret;
-const redirect_url = process.env.redirect_url;
+const oauth_url = getEnvVariable('oauth_url');
+const client_id = getEnvVariable('client_id');
+const client_secret = getEnvVariable('client_secret');
+const redirect_url = getEnvVariable('redirect_url');
 
 const oauth2Client = new OAuth2Client(oauth_url, client_id, client_secret, redirect_url);
 const userRepo = dataSource.getRepository(UserEntity);

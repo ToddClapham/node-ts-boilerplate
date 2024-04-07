@@ -2,8 +2,13 @@ import "reflect-metadata";
 import { DataSource } from "typeorm"
 import path = require("path");
 import { UserEntity } from "./user/UserEntity";
+import { getEnvVariable } from "./env";
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = getEnvVariable('NODE_ENV') === 'production';
+
+const username = getEnvVariable('dbusername');
+const password = getEnvVariable('dbpassword');
+const name = getEnvVariable('dbname');
 
 const entities = [
     UserEntity,
@@ -30,9 +35,9 @@ class DBFactory {
                     type: "mssql",
                     host: "localhost",
                     port: 1433,
-                    username: process.env.dbusername,
-                    password: process.env.dbpassword,
-                    database: process.env.dbname,
+                    username: username,
+                    password: password,
+                    database: name,
                     synchronize: true,
                     logging: false,
                     entities: entities,

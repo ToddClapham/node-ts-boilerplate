@@ -16,15 +16,15 @@ import userRoutes from './user/user.routes';
 import { dataSource } from './data-source';
 import tokenMid from './auth/token.middleware';
 import authMid from './auth/auth.middleware';
+import { getEnvVariable } from './env';
 
 dataSource.initialize().then(async () => {
 
     const app = express();
     
-    const port = process.env.port;
-    if (!port) throw new Error("No port set in env");
+    const port = getEnvVariable('port');
     
-    const isProduction = process.env.NODE_ENV === 'production';
+    const isProduction = getEnvVariable('NODE_ENV') === 'production';
     console.log('Production mode:', isProduction);
     
     // Cross Origin Resource Sharing - for secuity around the origin of requests

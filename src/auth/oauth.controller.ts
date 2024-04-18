@@ -1,18 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { OAuth2Client } from "./OAuth2Client";
-import { dataSource } from "../data-source";
 import { UserEntity } from "../user/user.entity";
-import { tokenService } from "../services";
-import { getEnvVariable } from "../env";
-
-
-const oauth_url = getEnvVariable('oauth_url');
-const client_id = getEnvVariable('client_id');
-const client_secret = getEnvVariable('client_secret');
-const redirect_url = getEnvVariable('redirect_url');
-
-const oauth2Client = new OAuth2Client(oauth_url, client_id, client_secret, redirect_url);
-const userRepo = dataSource.getRepository(UserEntity);
+import { oauth2Client, tokenService, userService } from "../services";
 
 async function getRedirectUrl(req: Request, res: Response, next: NextFunction) {
     try {
@@ -36,7 +24,7 @@ async function oauth2Callback(req: Request, res: Response, next: NextFunction) {
 
         console.log(`${userDetails.email} signed in at ${new Date().toISOString()}`);
         
-        let user = await userRepo.findOne({where: {email: userDetails.email}});
+        let user = await userService.getUserByEmail(userDetails.email);
         if (!user) {
             throw UserEntity.notFoundError;
         }

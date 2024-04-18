@@ -1,6 +1,4 @@
-
 import { Request, Response, NextFunction } from "express";
-
 import ErrorMessage from "../util/ErrorMessage";
 import { HttpCode } from "../util/HttpCodes";
 import { AuthenticationTypes } from "./AuthenticationTypes";

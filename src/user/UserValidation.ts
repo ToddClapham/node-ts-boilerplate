@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { UserEntity } from "./User.entity";
+import { UserEntity } from "./user.entity";
 import { NewUserDTO } from "./newUserDTO";
 
 export class UserValidation {

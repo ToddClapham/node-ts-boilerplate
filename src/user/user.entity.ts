@@ -16,8 +16,4 @@ export class UserEntity {
 
     @Column()
     isAdmin: boolean
-
-    static get notFoundError() {
-        return new ErrorMessage(HttpCode.notFound, "User not found");
-    }
 }

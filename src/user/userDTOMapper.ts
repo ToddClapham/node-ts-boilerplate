@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from "./user";
 import { UserDTO } from "./userDTO";
 
 export class UserDTOMapper {
@@ -10,5 +10,14 @@ export class UserDTOMapper {
             name: model.name,
             isAdmin: model.isAdmin,
         }
+    }
+
+    static toModel(dto: UserDTO): User {
+        return new User(
+            dto.id,
+            dto.email,
+            dto.name,
+            dto.isAdmin,
+        );
     }
 }

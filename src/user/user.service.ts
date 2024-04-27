@@ -1,9 +1,9 @@
 import { Repository } from "typeorm";
 import ErrorMessage from "../util/ErrorMessage";
 import { HttpCode } from "../util/HttpCodes";
-import { User } from "./User";
-import { UserMapper } from "./UserMapper";
-import { UserValidation } from "./UserValidation";
+import { User } from "./user";
+import { UserMapper } from "./userMapper";
+import { UserValidation } from "./userValidation";
 import { NewUserDTO } from "./newUserDTO";
 import { UserEntity } from "./user.entity";
 
@@ -58,11 +58,12 @@ export class UserService {
         return UserMapper.fromEntity(userEntity);
     }
 
-    async updateUser(user: User, userUpdate: any): Promise<User> {
-        let userEntity = UserMapper.toEntity(user);
+    async updateUser(user: User, userUpdate: User): Promise<User> {
+        const userEntity = UserMapper.toEntity(user);
+        const userUpdateEntity = UserMapper.toEntity(userUpdate);
 
-        userEntity = this.userRepo.merge(userEntity, userUpdate);
-        const updatedUser = await this.userRepo.save(userEntity);
+        const mergedUserEntity = this.userRepo.merge(userEntity, userUpdateEntity);
+        const updatedUser = await this.userRepo.save(mergedUserEntity);
         
         return UserMapper.fromEntity(updatedUser);
     }

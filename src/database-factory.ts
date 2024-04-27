@@ -16,9 +16,9 @@ const entities = [
 
 class DBFactory {
 
-    public static new(dialect: string) : DataSource {
-
-        switch (dialect) {
+    public static new(engine: string) : DataSource {
+    
+        switch (engine) {
             case "sqlite":
                 return new DataSource({
                     type: "sqlite",
@@ -46,7 +46,7 @@ class DBFactory {
                 })
         
             default:
-                throw new Error(`Unknown database type ${dialect}`);
+                throw new Error(`Unknown database type ${engine}`);
         }
     }
 }

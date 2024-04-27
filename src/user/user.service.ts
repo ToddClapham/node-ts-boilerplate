@@ -69,6 +69,7 @@ export class UserService {
     }
 
     async deleteUser(user: User) {
-        await this.userRepo.delete({id: user.id});
+        const userEntity = UserMapper.toEntity(user);
+        await this.userRepo.remove(userEntity);
     }
 }

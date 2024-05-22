@@ -1,1 +1,1 @@
-# WODHive API
+# TS Boilerplate

@@ -1,4 +1,4 @@
-# TS Boilerplate
+:scroll: # TS Boilerplate
 
 1. Download this code as a zip file from GitHub
 2. Rename the new project folder to your API's name

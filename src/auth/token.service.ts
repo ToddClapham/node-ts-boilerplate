@@ -16,7 +16,7 @@ export class TokenService {
     
             jwt.sign(payload, this.privateKey, { expiresIn: '8h' }, (err, token) => {
                 if (err) return reject(err);
-                return resolve(token);
+                return resolve(token as string);
             });
         })
     }

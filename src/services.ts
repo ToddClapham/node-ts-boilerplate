@@ -1,4 +1,4 @@
-import { OAuth2Client } from "./auth/OAuth2Client";
+import { OAuth2Client } from "./auth/oauth2Client";
 import { TokenService } from "./auth/token.service";
 import { dataSource } from "./data-source";
 import { getEnvVariable } from "./env";

@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { UserEntity } from "../user/user.entity";
 import { oauth2Client, tokenService, userService } from "../services";
+import ErrorMessage from "../util/ErrorMessage";
+import { HttpCode } from "../util/HttpCodes";
 
 async function getRedirectUrl(req: Request, res: Response, next: NextFunction) {
     try {
@@ -25,9 +27,7 @@ async function oauth2Callback(req: Request, res: Response, next: NextFunction) {
         console.log(`${userDetails.email} signed in at ${new Date().toISOString()}`);
         
         let user = await userService.getUserByEmail(userDetails.email);
-        if (!user) {
-            throw UserEntity.notFoundError;
-        }
+        if (!user) throw new ErrorMessage(HttpCode.badRequest, "User not found");
 
         const token = await tokenService.createToken(user);
         

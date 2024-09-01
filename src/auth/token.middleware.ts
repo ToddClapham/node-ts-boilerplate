@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import ErrorMessage from "../util/ErrorMessage";
 import { HttpCode } from "../util/HttpCodes";
-import { AuthenticationTypes } from "./AuthenticationTypes";
 import { tokenService } from "../services";
 import { getEnvVariable } from "../env";
+import { AuthenticationTypes } from "./authTypes.enum";
 
 const authMethodToUse = getEnvVariable('auth_method') ?? 'jwt';
 console.log('Initialised token middleware to use method:', authMethodToUse);
@@ -34,7 +34,7 @@ async function authenticate(req: Request, res: Response, next: NextFunction) {
  */
 async function tokenAuthenticate(req: Request, res: Response, next: NextFunction) {
     try {
-        const authHeader: string = req.get("Authorization");
+        const authHeader = req.get("Authorization");
         
         if (!authHeader) return next();
         

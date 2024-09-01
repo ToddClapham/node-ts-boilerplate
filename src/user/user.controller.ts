@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { UserDTOMapper } from "./userDTOMapper";
-import { User } from "./User";
+import { User } from "./user";
 import { NewUserDTO } from "./newUserDTO";
 import { userService } from "../services";
 

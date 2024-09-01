@@ -1,6 +1,6 @@
 import { dataSource } from "../data-source";
 import { UserEntity } from "./user.entity";
-import { User } from "./User";
+import { User } from "./user";
 
 const userRepo = dataSource.getRepository(UserEntity);
 

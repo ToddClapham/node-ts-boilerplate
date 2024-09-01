@@ -1,19 +1,17 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
-import ErrorMessage from "../util/ErrorMessage"
-import { HttpCode } from "../util/HttpCodes"
 
 @Entity({name: 'users'})
 export class UserEntity {
 
     @PrimaryGeneratedColumn()
-    id: number
+    id!: number
     
     @Column()
-    email: string
+    email!: string
 
     @Column()
-    name: string
+    name!: string
 
     @Column()
-    isAdmin: boolean
+    isAdmin!: boolean
 }

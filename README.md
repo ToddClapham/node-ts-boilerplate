@@ -1,4 +1,4 @@
-# TS Boilerplate
+# Node TS Boilerplate
 
 ## How to download this boilerplate:
 

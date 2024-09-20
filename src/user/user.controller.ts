@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { UserDTOMapper } from "./userDTOMapper";
 import { User } from "./user";
 import { NewUserDTO } from "./newUserDTO";
 import { userService } from "../services";
@@ -10,7 +9,7 @@ async function createUser(req: Request, res: Response, next: NextFunction) {
 
         const user = await userService.createUser(newUser);
 
-        const userDTO = UserDTOMapper.fromModel(user);
+        const userDTO = User.toDTO(user);
 
         res.send(userDTO);
     } catch (error) {
@@ -31,7 +30,7 @@ async function getUsers(req: Request, res: Response, next: NextFunction) {
     try {
         const users = await userService.getUsers();
 
-        const userDTOs = users.map(x => UserDTOMapper.fromModel(x));
+        const userDTOs = users.map(x => User.toDTO(x));
 
         res.send(userDTOs);
     } catch (error) {
@@ -44,7 +43,7 @@ async function getUserById(req: Request, res: Response, next: NextFunction) {
         const userId = +req.params.userId;
         const user = await userService.getUserById(userId);
 
-        const userDTO = UserDTOMapper.fromModel(user);
+        const userDTO = User.toDTO(user);
 
         res.send(userDTO);
     } catch (error) {
@@ -57,7 +56,7 @@ async function getUserByEmail(req: Request, res: Response, next: NextFunction) {
         const userEmail = req.params.userEmail;
         const user = await userService.getUserByEmail(userEmail);
 
-        const userDTO = UserDTOMapper.fromModel(user);
+        const userDTO = User.toDTO(user);
 
         res.send(userDTO);
     } catch (error) {
@@ -74,7 +73,7 @@ async function updateUser(req: Request, res: Response, next: NextFunction) {
 
         const updatedUser = await userService.updateUser(user, userUpdate);
 
-        const userDTO = UserDTOMapper.fromModel(updatedUser);
+        const userDTO = User.toDTO(updatedUser);
 
         res.send(userDTO);
     } catch (error) {
@@ -88,7 +87,7 @@ async function deleteUser(req: Request, res: Response, next: NextFunction) {
 
         await userService.deleteUser(user);
 
-        const userDTO = UserDTOMapper.fromModel(user);
+        const userDTO = User.toDTO(user);
 
         res.send(userDTO);
     } catch (error) {

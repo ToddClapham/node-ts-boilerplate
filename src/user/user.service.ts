@@ -2,7 +2,6 @@ import { Repository } from "typeorm";
 import ErrorMessage from "../util/ErrorMessage";
 import { HttpCode } from "../util/HttpCodes";
 import { User } from "./user";
-import { UserMapper } from "./userMapper";
 import { UserValidation } from "./userValidation";
 import { NewUserDTO } from "./newUserDTO";
 import { UserEntity } from "./user.entity";
@@ -32,12 +31,12 @@ export class UserService {
 
         await this.userRepo.save(userEntity);
 
-        return UserMapper.fromEntity(userEntity);
+        return User.fromEntity(userEntity);
     }
 
     async getUsers(): Promise<User[]> {
         const userEntities = await this.userRepo.find();
-        return userEntities.map(x => UserMapper.fromEntity(x));        
+        return userEntities.map(x => User.fromEntity(x));        
     }
 
     async getUserById(userId: number): Promise<User> {
@@ -46,7 +45,7 @@ export class UserService {
         });
         if (!userEntity) throw new ErrorMessage(HttpCode.badRequest, "User not found");
 
-        return UserMapper.fromEntity(userEntity);
+        return User.fromEntity(userEntity);
     }
 
     async getUserByEmail(userEmail: string): Promise<User> {
@@ -55,21 +54,21 @@ export class UserService {
         });
         if (!userEntity) throw new ErrorMessage(HttpCode.badRequest, "User not found");
 
-        return UserMapper.fromEntity(userEntity);
+        return User.fromEntity(userEntity);
     }
 
     async updateUser(user: User, userUpdate: User): Promise<User> {
-        const userEntity = UserMapper.toEntity(user);
-        const userUpdateEntity = UserMapper.toEntity(userUpdate);
+        const userEntity = User.toEntity(user);
+        const userUpdateEntity = User.toEntity(userUpdate);
 
         const mergedUserEntity = this.userRepo.merge(userEntity, userUpdateEntity);
         const updatedUser = await this.userRepo.save(mergedUserEntity);
         
-        return UserMapper.fromEntity(updatedUser);
+        return User.fromEntity(updatedUser);
     }
 
     async deleteUser(user: User) {
-        const userEntity = UserMapper.toEntity(user);
+        const userEntity = User.toEntity(user);
         await this.userRepo.remove(userEntity);
     }
 }
